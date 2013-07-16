@@ -1,7 +1,8 @@
 Roadtripescape::Application.routes.draw do
   
-  devise_for :models
+  devise_for :users
+  resources :users, :trips, :locations, :landmarks
 
-root :to => "trips#index"
+root :to => "home#index"
 
 end
