@@ -8,5 +8,6 @@ get 'page/edit'
 get "/parks" => "landmarks#index"
 get "/contact" => "trips#contact"
 get "/map" => "trips#map"
-
+post '/newtrip' => 'users#newtrip'
+# error_pages/404.html
 end

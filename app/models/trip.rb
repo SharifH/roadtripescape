@@ -10,7 +10,7 @@
 #
 
 class Trip < ActiveRecord::Base
-  attr_accessible :start, :end, :user_id, :directions
+  attr_accessible :start, :end, :user_id
   has_many :landmarks
   belongs_to :user
 end

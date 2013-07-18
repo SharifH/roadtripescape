@@ -1,10 +1,5 @@
 class UsersController < ApplicationController
 
-  def new
-    @user = User.new
-  end
-
-
 
   def show
     @user = User.find(params[:id])
@@ -13,6 +8,14 @@ class UsersController < ApplicationController
   def edit
     @user = User.find(params[:id])
   end
+
+  def newtrip
+    binding.pry
+    if params[:user_id].exists?
+        u = User.where('id = ?', params[:user_id]).first
+      end
+      puts u
+    end
 
   def update
     @user = User.find(params[:id])

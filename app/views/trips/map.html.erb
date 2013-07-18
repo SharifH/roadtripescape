@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+    <title>Waypoints in directions</title>
+    <link href="https://developers.google.com/maps/documentation/javascript/examples/default.css" rel="stylesheet">
+    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
+    <script>
+var directionsDisplay;
+var directionsService = new google.maps.DirectionsService();
+var map;
+
+function initialize() {
+  directionsDisplay = new google.maps.DirectionsRenderer();
+  var detroit = new google.maps.LatLng(42.3314, -83.0458);
+  var mapOptions = {
+    zoom: 12,
+    mapTypeId: google.maps.MapTypeId.ROADMAP,
+    center: detroit
+  }
+  map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+  directionsDisplay.setMap(map);
+}
+
+function calcRoute() {
+  var start = document.getElementById('start').value;
+  var end = document.getElementById('end').value;
+  var waypts = [];
+  var checkboxArray = document.getElementById('waypoints');
+  for (var i = 0; i < checkboxArray.length; i++) {
+    if (checkboxArray.options[i].selected == true) {
+      waypts.push({
+          location:checkboxArray[i].value,
+          stopover:true});
+    }
+  }
+  function calcRoute() {
+  var start = document.getElementById("start").value;
+  var end = document.getElementById("end").value;
+  var request = {
+    origin:start,
+    destination:end,
+    travelMode: google.maps.TravelMode.DRIVING
+  };
+  directionsService.route(request, function(result, status) {
+    if (status == google.maps.DirectionsStatus.OK) {
+      directionsDisplay.setDirections(result);
+    }
+  });
+}
+
+  var request = {
+      origin: start,
+      destination: end,
+      waypoints: waypts,
+      optimizeWaypoints: true,
+      travelMode: google.maps.TravelMode.DRIVING
+  };
+  directionsService.route(request, function(response, status) {
+    if (status == google.maps.DirectionsStatus.OK) {
+      directionsDisplay.setDirections(response);
+      var route = response.routes[0];
+      var summaryPanel = document.getElementById('directions_panel');
+      summaryPanel.innerHTML = '';
+      // For each route, display summary information.
+      for (var i = 0; i < route.legs.length; i++) {
+        var routeSegment = i + 1;
+        summaryPanel.innerHTML += '<b>Route Segment: ' + routeSegment + '</b><br>';
+        summaryPanel.innerHTML += route.legs[i].start_address + ' to ';
+        summaryPanel.innerHTML += route.legs[i].end_address + '<br>';
+        summaryPanel.innerHTML += route.legs[i].distance.text + '<br>';
+        summaryPanel.innerHTML += route.legs[i].duration.text +'<br><br>';
+      }
+    }
+  });
+}
+
+google.maps.event.addDomListener(window, 'load', initialize);
+
+    </script>
+  </head>
+  <body>
+    <div id="map-canvas" style="float:left;margin-top: 60px;width:775px;height:600px;"></div>
+    <div id="control_panel" style="float:right;margin-top: 60px; width:30%;text-align:left;padding-top:20px">
+    <div style="margin:20px;border-width:2px;">
+    <b>Start:</b>
+    <select id="start">
+      <option value="San Francisco, CA">San Francisco, CA</option>
+      <option value="Los Angeles, CA">Los Angeles, CA</option>
+      <option value="New York, NY">New York, NY</option>
+      <option value="Seattle, WA">Seattle, WA</option>
+      <option value="Chicago, IL">Chicago, IL</option>
+      <option value="Miami, FL">Miami, FL</option>
+      <option value="Boston, MA">Boston, MA</option>
+      <option value="Detroit, MI">Detroit, MI</option>
+      <option value="Milwaulkee, WI">Milwaulkee, WI</option>
+      <option value="Las Vegas, NV">Las Vegas, NV</option>
+      <option value="Portand, OR">Portand, OR</option>
+      <option value="San Deigo, CA">San Deigo, CA</option>
+      <option value="Austin, TX">Austin, TX</option>
+      <option value="Atlanta, GA">Atlanta, GA</option>
+      <option value="Kansas City, Missouri">Kansas City, Missouri</option>
+    </select>
+    <br>
+    <b>Waypoints:</b> <br>
+    <i>Ctrl-Click Windows for multiple selection</i><br>
+    <i>Cmd-Click Mac for multiple selection</i> <br>
+    <select multiple id="waypoints" style="height:282px;">
+      <option value="Acadia National Park">Acadia National Park</input>
+      <option value="Yellowstone National Park">Yellowstone National Park</input>
+      <option value="Badlands National Park">Badlands National Park</input>
+      <option value="Blue Ridge Parkway">Blue Ridge Parkway</input>
+      <option value="Cuyahoga Valley National Park">Cuyahoga Valley National Park</input>
+      <option value="Natchez Trace Park">Natchez Trace Park</input>
+      <option value="George Washington Memorial Parkway">George Washington Memorial Parkway</input>
+      <option value="Golden Gate National Recreation Area">Golden Gate National Recreation Area</input>
+      <option value="Grand Canyon National Park">Grand Canyon National Park</input>
+      <option value="Grand Teton National Park">Grand Teton National Park</input>
+      <option value="Lake Mead National Recreation Area">Lake Mead National Recreation Area</input>
+      <option value="Olympic National Park">Olympic National Park</input>
+      <option value="Rocky Mountain National Park">Rocky Mountain National Park</input>
+      <option value="Great Smoky Mountains National Par">Great Smoky Mountains National Par</input>
+      <option value="Yosemite National Park">Yosemite National Park</input>
+      <option value="Zion National Park">Zion National Park</input>
+    </select>
+    <br>
+    <b>End:</b>
+    <select id="end">
+      <option value="San Francisco, CA">San Francisco, CA</option>
+      <option value="Los Angeles, CA">Los Angeles, CA</option>
+      <option value="New York, NY">New York, NY</option>
+      <option value="Seattle, WA">Seattle, WA</option>
+      <option value="Chicago, IL">Chicago, IL</option>
+      <option value="Miami, FL">Miami, FL</option>
+      <option value="Boston, MA">Boston, MA</option>
+      <option value="Detroit, MI">Detroit, MI</option>
+      <option value="Milwaulkee, WI">Milwaulkee, WI</option>
+      <option value="Portand, OR">Portand, OR</option>
+      <option value="San Deigo, CA">San Deigo, CA</option>
+      <option value="Austin, TX">Austin, TX</option>
+      <option value="Atlanta, GA">Atlanta, GA</option>
+      <option value="Kansas City, Missouri">Kansas City, Missouri</option>
+    </select>
+    <br>
+      <input type="submit" onclick="calcRoute();">
+    </div>
+    <div id="directions_panel" style="margin:20px;background-color:#FFEE77;"></div>
+    </div>
+  </body>
+</html>
