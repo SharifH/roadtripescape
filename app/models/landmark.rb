@@ -9,6 +9,6 @@
 #
 
 class Landmark < ActiveRecord::Base
-  attr_accessible :location_id, :image, :bio, :landmark_name
-  belongs_to :location
+  attr_accessible :trip_id, :image, :bio, :landmark_name
+  belongs_to :trip
 end

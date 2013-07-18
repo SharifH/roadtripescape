@@ -33,4 +33,10 @@ class TripsController < ApplicationController
     redirect_to(ingredients_path)
   end
 
+  def contact
+  end
+
+  def map
+  end
+
 end

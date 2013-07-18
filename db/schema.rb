@@ -14,6 +14,7 @@
 ActiveRecord::Schema.define(:version => 20130714231101) do
 
   create_table "landmarks", :force => true do |t|
+    t.string   "name"
     t.integer  "location_id"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false

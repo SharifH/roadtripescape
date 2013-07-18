@@ -11,3 +11,19 @@
  *= require_self
  *= require_tree .
  */
+.img-rounded {
+  height: 250px;
+  width: 375px;
+}
+/*.parkpic {
+  float: right;
+}*/
+.info {
+  float:left;
+}
+.img-circle{
+
+  height: 140px;
+  width: 140px;
+  border-radius: 50px;
+}
