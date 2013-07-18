@@ -27,3 +27,8 @@
   width: 140px;
   border-radius: 50px;
 }
+.btn{
+  color:#000000;
+  background-color:#CCCCCC;
+  font-family: Georgia;
+}
